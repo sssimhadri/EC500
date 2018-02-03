@@ -4,6 +4,8 @@
 import tweepy #https://github.com/tweepy/tweepy
 import csv
 import sys
+import urllib
+import os
 
 #Twitter API credentials
 consumer_key = "Zn2pUf47yCpQctv9yknmeaRk0"
@@ -52,23 +54,29 @@ def get_all_tweets(screen_name):
         for tweet in alltweets:
                 #not all tweets will have media url, so lets skip them
                 try:
-                        print tweet.entities['media'][0]['media_url']
+                        tweet.entities['media'][0]['media_url']
                 except (NameError, KeyError):
                         #we dont want to have any entries without the media_url so lets do nothing
                         pass
                 else:
                         #got media_url - means add it to the output
-                        outtweets.append([tweet.id_str, tweet.created_at, tweet.text.encode("utf-8"), tweet.entities['media'][0]['media_url']])
+                        outtweets.append([ tweet.entities['media'][0]['media_url']])
 
-        #write the csv  
-        with open('%s_tweets.csv' % screen_name, 'wb') as f:
-                writer = csv.writer(f)
-                writer.writerow(["id","created_at","text","media_url"])
-                writer.writerows(outtweets)
 
-        pass
+        print("--------------------- LINKS START FROM HERE ---------------------")
+
+
+        a = 0
+
+        for i in range(0,20):
+                str(a)
+                urllib.urlretrieve(outtweets[i][0],"image_%s.jpg" % a)
+                int(a)
+                a = a + 1
+
+        os.system('ffmpeg -r 1 -i image_%001d.jpg -vcodec libx264 -b:v 2M -maxrate 2M -bufsize 1M -y -an -filter:v "setpts=2.0*PTS" -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" video.mp4')
 
 
 if __name__ == '__main__':
         #pass in the username of the account you want to download
-        get_all_tweets("DonaldTrump")
+        get_all_tweets("TerrierTennis")
