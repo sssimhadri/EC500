@@ -6,11 +6,11 @@ import os
 import time
 
 #Cleans folder from files generated in previous runs
-#for file in os.listdir():
- #   if file.endswith('.jpg'):
-  #      os.remove(file)
-    #elif file.endswith('.mp4'):
-     #   os.remove(file)
+for file in os.listdir():
+    if file.endswith('.jpg'):
+        os.remove(file)
+    elif file.endswith('.mp4'):
+        os.remove(file)
 
 #Create variables to store time and folder size before program run
 size_before = sum(os.path.getsize(f) for f in os.listdir('.') if os.path.isfile(f))
