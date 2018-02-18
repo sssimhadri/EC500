@@ -6,7 +6,7 @@ import os
 import time
 
 #Cleans folder from files generated in previous runs
-for file in os.listdir():
+for file in os.listdir('.'):
     if file.endswith('.jpg'):
         os.remove(file)
     elif file.endswith('.mp4'):
