@@ -1,11 +1,14 @@
 from flask import Flask, render_template, flash, request, url_for, redirect
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 import twitter
+import os
+from os import listdir
 # App config.
 DEBUG = True
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
+video_path="."
  
 class ReusableForm(Form):
     username = TextField('Username:', validators=[validators.required()])
@@ -39,8 +42,9 @@ def hello():
 def twitterfeed():
     with open("imagelabels.txt") as f:
         labels = f.readlines()
+    video_file = [f for f in os.listdir(video_path) if f.endswith('mp4')]
 
-    return render_template('twitterfeed.html', your_list=labels, your_video='video.mp4')
+    return render_template('twitterfeed.html', your_list=labels, your_video=video_file)
  
 if __name__ == "__main__":
     app.run()

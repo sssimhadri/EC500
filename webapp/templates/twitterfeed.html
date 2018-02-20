@@ -1,11 +1,12 @@
 <html>
 <body>
 
-	<video width="720" height="460" controls>
-	  <source src="video.mp4" type="video/mp4">
-	  <p>{{ your_video }} </p>
+	<video width="320" height="240" controls>
+  		<source src="./static/movie.mp4" type="video/mp4">
+  		<source src="./movie.ogg" type="video/ogg">
+  		<p> {{ your_video}} </p>
+		Your browser does not support the video tag.
 	</video>
-
   {% for your_list_element in your_list %}
       <p>{{ your_list_element }} </p>
   {% endfor %}
