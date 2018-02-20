@@ -20,10 +20,10 @@ from os import listdir
 
 
 #Twitter API credentials
-consumer_key = "Zn2pUf47yCpQctv9yknmeaRk0"
-consumer_secret = "Zluvj7qJ1b4QpcPFa8Y5rFhTDv4wDbfRuSkCbzKPMig2pKp50m"
-access_key = "958121468163973120-zTs2rmOABdByQ7G7VWvpZeRXcRvdkaz"
-access_secret = "8FeVaMtf8FSEZVuv3EOK53cRKHek4OyK4tpSOzZvVVjrR"
+consumer_key = ""
+consumer_secret = ""
+access_key = ""
+access_secret = ""
 
 
 def get_all_tweets(screen_name):
