@@ -98,7 +98,7 @@ def get_all_tweets(screen_name):
                 
         try:
             os.system('ffmpeg -r 1 -i image_%001d.jpg -vcodec libx264 -b:v 2M -maxrate 2M -bufsize 1M -y -an -filter:v "setpts=2.0*PTS" -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" video.mp4')
-            os.chdir("..")
+         
         except (RuntimeError, TypeError, NameError):
             print('ERROR: ffmpeg unable to to create video')
             pass
