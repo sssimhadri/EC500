@@ -6,6 +6,7 @@ import csv
 import sys
 import urllib
 import os
+from google.cloud import videointelligence
 
 #Twitter API credentials
 consumer_key = "Zn2pUf47yCpQctv9yknmeaRk0"
