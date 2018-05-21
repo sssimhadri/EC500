@@ -73,29 +73,21 @@ def create_video():
 
 def analysis():
 
-	labels = dict()
-	labels['VideoLabel'] = []
-	labels['CategoryLabel'] = []
-	
-	video_client = videointelligence.VideoIntelligenceServiceClient()
-	features = [videointelligence.enums.Feature.LABEL_DETECTION]
+	data = dict()
+	for filename in glob.glob('*.jpg'):
+		info = []
+		with io.open(filename, 'rb') as image_file:
+        	content = image_file.read() 
+    	image = types.Image(content=content)
+    	response = client.label_detection(image=image)
+    	labels = response.label_annotations
+    	
+    	for label in labels:
+        	lbs.append(str(label.description))
 
+        data[str(filename)] = info
 
-	with io.open('video.mp4', 'rb') as movie:
-		input_content = movie.read()
-
-	operation = video_client.annotate_video(features=features, input_content=input_content)
-
-	result = operation.result(timeout=90)
-
-	segment_labels = result.annotation_results[0].segment_label_annotations
-
-	for i, segment_label in enumerate(segment_labels):
-		labels['VideoLabel'].append(segment_label.entity.description)
-		for category_entity in segment_label.category_entities:
-			labels['CategoryLabel'].append(category_entity.description)
-
-	return labels
+    return data
 
 def Initialize():
 	try: 
@@ -123,7 +115,7 @@ def main():
 	
     for handle in twitterHandles:
 		outtweets = get_tweets(handle)
-		download_images(outtweets,amount)
+		download_images(outtweets)
 		create_video()
 		labels = analysis()
 		data = {
