@@ -77,7 +77,10 @@ def create_video():
 
 def analysis():
 
+	client = vision.ImageAnnotatorClient()
+
 	data = dict()
+
 	for filename in glob.glob('*.jpg'):
 		info = []
 		with io.open(filename, 'rb') as image_file:
